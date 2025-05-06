@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>WARA Dashboard UX</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id="particles"></div>
+  
+    <div id="startup">
+      <img src="logotransp.png" alt="Logo WARA">
+    </div>
+  
+    <div id="panel">
+      <div class="top-bar">
+        <div class="logo">WARA</div>
+        <div class="time">10:10 AM</div>
+      </div>
+  
+      <div class="center-gauge">
+        <div class="speed-display" style="position: relative; width: 280px; height: 280px; display: flex; align-items: center; justify-content: center;">
+          <svg width="100%" height="100%" viewBox="0 0 200 200" style="position: absolute; top: 0; left: 0;">
+            <circle cx="100" cy="100" r="80" stroke="#0f403b" stroke-width="15" fill="none" />
+            <circle id="speed-ring" cx="100" cy="100" r="80" stroke="#00ffee" stroke-width="15" fill="none"
+                    stroke-dasharray="502" stroke-dashoffset="502" transform="rotate(-90 100 100)"
+                    style="transition: stroke-dashoffset 0.4s ease;" />
+          </svg>
+          <div style="position: relative; z-index: 1; text-align: center;">
+            <h1 id="velocidad" style="font-size: 64px; margin: 0; color: #adfff5;">0</h1>
+            <span style="font-size: 18px; color: #8efcdd;">km/h</span>
+          </div>
+        </div>
+      </div>
+      
+    <div class="stats-row">
+      <div class="stat-box" onclick="showSection('distancia')">
+        <div class="label">Distancia</div>
+        <div class="value" id="distancia">-- cm</div>
+      </div>
+      <div class="stat-box" onclick="showSection('puerta')">
+        <div class="label">Puerta</div>
+        <div class="value" id="puerta">--</div>
+      </div>
+      <div class="stat-box" onclick="showSection('llanta')">
+        <div class="label">Llanta</div>
+        <div class="value" id="llanta">--</div>
+      </div>
+      <div class="stat-box" onclick="showSection('bateria')">
+        <div class="label">Batería</div>
+        <div class="value" id="bateria">-- %</div>
+      </div>
+    </div>
+
+    <div class="footer-controls">
+      <button onclick="connect()">Conectar</button>
+      <button onclick="sendCommand('ABRIR PUERTA')">Abrir Puerta</button>
+      <button onclick="sendCommand('CERRAR PUERTA')">Cerrar Puerta</button>
+      <button onclick="sendCommand('ENCENDER AUTO')">Encender Auto</button>
+      <button onclick="sendCommand('APAGAR AUTO')">Apagar Auto</button>
+    </div>
+  </div>
+
+  <!-- Secciones extendidas -->
+  <div id="section-distancia" class="section">
+    <button class="back-button" onclick="closeSections()">Volver</button>
+    <h2>Radar de Proximidad</h2>
+    <div class="section-content">
+      <svg width="300" height="300" viewBox="0 0 300 300">
+        <circle cx="150" cy="150" r="140" stroke="#444" stroke-width="4" fill="none" />
+        <circle id="proximity-circle" cx="150" cy="150" r="10" fill="green" />
+      </svg>
+      <p id="proximity-text" style="margin-top:20px; font-size:22px; color:white;">Distancia: -- cm</p>
+    </div>
+  </div> 
+
+  <div id="section-puerta" class="section">
+    <button class="back-button" onclick="closeSections()">Volver</button>
+    <h2>Estado de la Puerta</h2>
+    <div class="section-content" style="text-align:center;">
+      <img id="door-image" src="" alt="Puerta" style="width:200px; height:auto; transition: transform 0.5s;">
+      <p id="door-status" style="font-size:22px; margin-top:20px; color:white;">Estado: --</p>
+    </div>
+  </div>
+
+  <div id="section-llanta" class="section">
+    <button class="back-button" onclick="closeSections()">Volver</button>
+    <h2>Estado de Llantas</h2>
+    <div class="section-content" style="text-align:center;">
+      <div id="tyre-status" style="width:120px; height:120px; margin: 0 auto; border-radius:50%; border:6px solid lime; transition: border-color 0.5s;"></div>
+      <p id="tyre-text" style="font-size:22px; margin-top:20px; color:white;">Presión: --</p>
+    </div>
+  </div>
+
+  <div id="section-bateria" class="section">
+    <button class="back-button" onclick="closeSections()">Volver</button>
+    <h2>Nivel de Batería</h2>
+    <div class="section-content">
+      <div style="width: 80%; height: 50px; border: 2px solid #fff; border-radius: 10px; margin: 20px auto; position: relative;">
+        <div id="battery-bar" style="height: 100%; width: 0%; background: lime; border-radius: 8px 0 0 8px;"></div>
+      </div>
+      <p id="battery-text" style="text-align:center; font-size:22px; color:white;">Carga: --%</p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+  <script src="scri.js"></script>
+</body>
+</html>
